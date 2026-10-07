@@ -1,0 +1,88 @@
+[
+    {
+        "name": "FPort 11: setpoint 21.5 degC, heating on",
+        "input": {
+            "data": {
+                "target_temp_c": 21.5,
+                "heating": true
+            }
+        },
+        "expected": {
+            "bytes": [ 0x01, 0x00, 0xd7, 0x01 ]
+        }
+    },
+    {
+        "name": "FPort 11: setpoint -3.5 degC, heating off",
+        "input": {
+            "data": {
+                "target_temp_c": -3.5,
+                "heating": false
+            }
+        },
+        "expected": {
+            "bytes": [ 0x01, 0xff, 0xdd, 0x00 ]
+        }
+    },
+    {
+        "name": "FPort 10: tx 300 s, rejoin off, all events",
+        "input": {
+            "data": {
+                "tx_period_s": 300,
+                "rejoin_period_h": 0,
+                "event_enable": {
+                    "mag": true,
+                    "acc": true,
+                    "in1": true,
+                    "in2": true,
+                    "btn2": true,
+                    "temp": true
+                }
+            }
+        },
+        "expected": {
+            "bytes": [ 0x01, 0x01, 0x2c, 0x00, 0x00, 0x5f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ]
+        }
+    },
+    {
+        "name": "FPort 10: tx 900 s, rejoin off, MAG + BTN2 only (raw mask)",
+        "input": {
+            "data": {
+                "tx_period_s": 900,
+                "rejoin_period_h": 0,
+                "event_enable_mask": 17
+            }
+        },
+        "expected": {
+            "bytes": [ 0x01, 0x03, 0x84, 0x00, 0x00, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ]
+        }
+    },
+    {
+        "name": "FPort 10: seed IN1 = 1000, IN2 = 2000",
+        "input": {
+            "data": {
+                "tx_period_s": 300,
+                "rejoin_period_h": 0,
+                "event_enable_mask": 95,
+                "in1_counter_seed": 1000,
+                "in2_counter_seed": 2000
+            }
+        },
+        "expected": {
+            "bytes": [ 0x01, 0x01, 0x2c, 0x00, 0x00, 0x5f, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xe8, 0x00, 0x00, 0x07, 0xd0 ]
+        }
+    },
+    {
+        "name": "Mixed FPort 10 and FPort 11 fields",
+        "input": {
+            "data": {
+                "tx_period_s": 300,
+                "target_temp_c": 21.5
+            }
+        },
+        "expected": {
+            "errors": [
+                "mixed FPort 10 and FPort 11 fields - send them separately"
+            ]
+        }
+    }
+]

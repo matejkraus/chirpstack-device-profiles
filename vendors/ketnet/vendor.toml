@@ -1,0 +1,8 @@
+[vendor]
+id = "414a2f50-f798-4f93-ab6f-5cffb96d0a9c"
+name = "KETNET"
+vendor_id = 0
+ouis = []
+
+[vendor.metadata]
+homepage = "https://www.ketnet.cz"

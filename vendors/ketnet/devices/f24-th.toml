@@ -1,0 +1,16 @@
+[device]
+id = "932d890e-4394-41d1-8814-c67afa10c2e9"
+name = "F24-TH"
+description = "LoRaWAN thermometer and hygrometer with display, two pulse-counting digital inputs and a magnetic contact."
+
+[[device.firmware]]
+version = "1"
+profiles = ["EU868-1_0_4.toml"]
+codec = "f24-th.js"
+
+[[device.firmware]]
+version = "2"
+profiles = ["EU868-1_0_4.toml"]
+codec = "f24-th.js"
+
+[device.metadata]
